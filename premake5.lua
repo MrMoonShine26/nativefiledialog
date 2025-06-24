@@ -26,32 +26,10 @@ project "NFD"
 
     filter "system:linux"
         files { "src/nfd_common.c", "src/nfd_gtk.c" }
-
-        includedirs {
-            "/usr/include/gtk-3.0",
-            "/usr/include/glib-2.0",
-            "/usr/lib/x86_64-linux-gnu/glib-2.0/include",
-            "/usr/include/cairo",
-            "/usr/include/pango-1.0",
-            "/usr/include/harfbuzz",
-            "/usr/include/gdk-pixbuf-2.0",
-            "/usr/include/atk-1.0"
-        }
-
-        libdirs { "/usr/lib/x86_64-linux-gnu" }
-
-        links {
-            "gtk-3",
-            "gdk-3",
-            "gio-2.0",
-            "glib-2.0",
-            "pango-1.0",
-            "harfbuzz",
-            "atk-1.0",
-            "cairo"
-        }
-
-filter "configurations:Debug"
+		buildoptions{"pkg-config --cflags gtk+-3.0"}
+        buildoptions{"pkg-config --libs gtk+-3.0"}
+      
+	filter "configurations:Debug"
 		runtime "Debug"
 		symbols "on"
 
