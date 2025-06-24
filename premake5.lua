@@ -26,8 +26,11 @@ project "NFD"
 
     filter "system:linux"
         files { "src/nfd_common.c", "src/nfd_gtk.c" }
-		buildoptions{"pkg-config --cflags gtk+-3.0"}
-        buildoptions{"pkg-config --libs gtk+-3.0"}
+        links { "gtk-3.0" }
+        gtkCFlag = os.outputof("pkg-config --cflags gtk+-3.0")
+        gtkLibs = os.outputof("pkg-config --libs gtk+-3.0")
+		buildoptions{gtkCFlag}
+        buildoptions{gtkLibs}
       
 	filter "configurations:Debug"
 		runtime "Debug"
